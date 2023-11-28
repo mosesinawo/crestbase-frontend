@@ -6,6 +6,7 @@ import Slider from 'react-slick'
 import { ApartmentData, ApartmentResponse, Features } from '../../../types/asset.types';
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import Head from 'next/head';
 
 interface Feature {
     key: string;
@@ -39,7 +40,7 @@ const AssetSetails = () => {
     //     name,
     //     count,
     // }));
-    const objtoarray = (data:any) => {
+    const objtoarray = (data: any) => {
         // Convert the object to a list of key-value pairs using Object.entries()
         if (data && item?.features) {
             const list = Object.entries(data)?.map(([key, value]) => ({ key, value }));
@@ -51,54 +52,28 @@ const AssetSetails = () => {
 
     console.log(features)
 
-    const hotelCards = [
-        {
-            imageSrc:
-                'https://images.unsplash.com/photo-1559508551-44bff1de756b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80',
-            title: 'Studio Room',
-            description: 'Lorem ipsum dolor sit amet, consectur dolori',
-            pricingText: 'USD 50/Day',
-            features: ['Free Wifi', 'Free breakfast'],
-        },
-        {
-            imageSrc:
-                'https://images.unsplash.com/photo-1616940844649-535215ae4eb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
-            title: 'Deluxe Room',
-            description: 'Lorem ipsum dolor sit amet, consectur dolori',
-            pricingText: 'USD 80/Day',
-            features: ['Free Wifi', 'Free breakfast'],
-        },
-        {
-            imageSrc:
-                'https://images.unsplash.com/photo-1599619351208-3e6c839d6828?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=872&q=80',
-            title: 'King Deluxe Room',
-            description: 'Lorem ipsum dolor sit amet, consectur dolori',
-            pricingText: 'USD 150/Day',
-            features: ['Free Wifi', 'Free breakfast', 'Discounted Meals'],
-        },
-        {
-            imageSrc:
-                'https://images.unsplash.com/photo-1461092746677-7b4afb1178f6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
-            title: 'Royal Suite',
-            description: 'Lorem ipsum dolor sit amet, consectur dolori',
-            pricingText: 'USD 299/Day',
-            features: [
-                'Free Wifi',
-                'Free breakfast',
-                'Discounted Meals',
-                "MacBook for work use (hotel's property)",
-            ],
-        },
-    ]
-
     const sliderSettings = {
         slidesToShow: 1,
         slidesToScroll: 1,
         infinite: false,
     }
 
+
+    const shareUrl = `https://staging-crestbase-frontend.vercel.app/assetDetails/${item?._id}`;
+    const imageUrl = `${item?.views[0].url}`;
+
     return (
         <>
+            <Head>
+                <title>{item?.name || 'Property Details'}</title>
+                <meta name="description" content={item?.description || 'Property description'} />
+
+                {/* Open Graph Meta Tags */}
+                <meta property="og:title" content={item?.name || 'Property Details'} />
+                <meta property="og:description" content={item?.description || 'Property description'} />
+                <meta property="og:image" content={item?.views[0]?.url || 'default-image-url'} />
+                <meta property="og:url" content={shareUrl} /> {/* Use shareUrl instead of url */}
+            </Head>
             <section className="container details mt-5">
                 <div className="row">
                     <div className="col-lg-7 col-md-11 mx-auto">
@@ -145,7 +120,7 @@ const AssetSetails = () => {
                         <div className="details-features">
                             <h6>Features</h6>
                             <div className='details-features-list'>
-                                {features?.map((item:any) => (
+                                {features?.map((item: any) => (
                                     <p>{item.key}: <span>{item.value}</span></p>
                                 ))}
                             </div>
