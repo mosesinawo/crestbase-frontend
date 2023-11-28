@@ -1,0 +1,87 @@
+// @import 'nprogress/nprogress.css';
+// /* Make sure the position is relative */
+// #nprogress {
+//     position: relative;
+//     z-index: 555555;
+// }
+
+// #nprogress .bar {
+//     background-color: red !important;
+//     /* Change this to any color you want */
+// }
+
+// /* Fancy blur effect */
+// #nprogress .blur {
+//     background-color: rgba(255, 255, 255, 0.2);
+//     border-radius: 100%;
+//     height: 12px;
+//     left: -6px;
+//     position: absolute;
+//     top: -6px;
+//     width: 12px;
+// }
+
+// /* The progress bar itself */
+// #nprogress .bar {
+//     background-color: #29d;
+
+//     /* This is what makes the progress bar work */
+//     height: 4px;
+//     transition: width 0.2s ease-out;
+// }
+
+// /* The spinner */
+// #nprogress .spinner {
+//     display: block;
+//     height: 100%;
+//     position: absolute;
+//     right: -12px;
+//     top: -2px;
+//     width: auto;
+// }
+
+// /* The spinner icon */
+// #nprogress .spinner-icon {
+//     border-top-color: #29d;
+//     border-left-color: #29d;
+//     border-radius: 50%;
+//     border-right-color: transparent !important;
+//     border-width: 2px;
+//     height: 16px;
+//     margin-left: -8px !important;
+//     margin-top: -8px !important;
+//     position: absolute;
+//     top: 50% !important;
+//     width: 16px;
+// }
+
+// /* The spinner animation */
+// #nprogress .spinner-icon.spin {
+//     animation: nprogress-spinner .4s linear infinite;
+// }
+
+// @keyframes nprogress-spinner {
+//     from {
+//         transform: rotate(0deg);
+//     }
+
+//     to {
+//         transform: rotate(360deg);
+//     }
+// }
+
+
+// #nprogress {
+
+//     // Background bar
+//     .bar {
+//         background: $red !important;
+//         height: 2px !important;
+//         z-index: 55555 !important;
+//         border-top: 4px solid $green !important;
+
+//         .peg {
+//             box-shadow: 0 0 2px #fff, 0 0 5px #fff !important;
+//         }
+//     }
+// }

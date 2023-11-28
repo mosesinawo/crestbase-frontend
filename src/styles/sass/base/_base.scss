@@ -1,0 +1,59 @@
+*,
+*::after,
+*::before {
+
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+// @include respond (tab-land) {
+//   font-size: 56.25%;
+// }
+
+// @include respond (tab-port) {
+//   font-size: 50%;
+// }
+
+// /*@include respond (phone){
+//   font-size: 30%;
+// }*/
+// @include respond (big-desktop) {
+//   font-size: 75%;
+// }
+
+
+
+li {
+  list-style: none;
+  font-family: 'Inter', sans-serif;
+}
+
+button{
+  font-family: 'Inter', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+}
+
+p, span {
+  font-family: 'Inter', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Merriweather', serif;
+  font-style: normal;
+  color: $color-primary;
+}
+

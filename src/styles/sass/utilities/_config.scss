@@ -1,0 +1,70 @@
+// // Font Stacks
+
+// @mixin do-font-face($name, $file-name, $url, $type, $weight, $style) {
+//     @font-face {
+//         font-family: $name;
+
+//         //src: url(#{$url + $file-name}.eot);
+//         //src: url(#{$url + $file-name}.eot?#iefix) format('embedded-opentype');
+//         @if $type=="otf" {
+//             src: url(#{$url + $file-name}.otf) format('opentype');
+//         }
+
+//         @if $type=="ttf" {
+//             src: url(#{$url + $file-name}.ttf) format('truetype');
+//         }
+
+//         @if $type=="woff" {
+//             src: url(#{$url + $file-name}.woff);
+//         }
+
+//         @if $type=="woff2" {
+//             src: url(#{$url + $file-name}.woff2);
+//         }
+
+//         font-weight: $weight;
+//         font-style: $style;
+//     }
+// }
+
+
+// @include do-font-face('Gilroy', 'Gilroy-Light', '/fonts/', 'otf', normal, normal);
+// @include do-font-face('Gilroy', 'Gilroy-Medium', '/fonts/', 'ttf', 600, normal);
+// @include do-font-face('Gilroy', 'Gilroy-Bold', '/fonts/', 'ttf', bold, normal);
+// @include do-font-face('Gilroy', 'Gilroy-ExtraBold', '/fonts/', 'otf', 900, normal);
+
+// $gilroy : 'Gilroy', sans-serif;
+
+
+// $ffb : $gilroy;
+// $ffh : $gilroy;
+
+// $semi-bold  : 600;
+// $extra-bold : 900;
+
+// // Colors
+// $white: #ffffff;
+// $midnight-blue : #302D5D;
+// $green : #005224;
+// $light-green : #82E6DC;
+// $purple : #7E5298;
+// $purple : #a12ad8;
+// $light-purple : lighten($purple, 35%);
+// $black : #141423;
+// $rear-black : #62626C;
+// $cyan : #CDF5F1;
+
+// $dark-blue: #171F78;
+// $grey : #93939A;
+// $dark-grey : #3C454C;
+// $thick-grey : #454657;
+// $mid-grey : #E8E8EA;
+// $light-purple: #ECD4F7;
+// $red: #DD1D1D;
+// $orange: #FF8503;
+// $light-red: #FCE8E8;
+
+// $mobile_width: 576px;
+// $tablet_width: 767px;
+// $tablet_landscape_width: 992px;
+// $desktop_width: 1200px;

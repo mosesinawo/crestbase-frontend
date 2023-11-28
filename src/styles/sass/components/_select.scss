@@ -1,0 +1,12 @@
+.header {
+
+
+    &-select {
+        display: flex;
+        gap: 1.5rem;
+
+        &__menu {
+            width: 15.6rem;
+        }
+    }
+}
