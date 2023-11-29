@@ -66,16 +66,16 @@ const AssetSetails = () => {
 
     return (
         <>
-           {item && <Head>
+           <Head>
                 <title>{item?.name || 'Property Details'}</title>
                 <meta name="description" content={item?.description || 'Property description'} />
 
                 {/* Open Graph Meta Tags */}
                 <meta property="og:title" content={item?.name || 'Property Details'} />
                 <meta property="og:description" content={item?.description || 'Property description'} />
-                <meta property="og:image" content={imageUrl || 'default-image-url'} />
+                <meta property="og:image" content={imageUrl || 'https://res.cloudinary.com/dr0pef3mn/image/upload/v1700944172/Assets/1700944172082-IMG_7184.png.png'} />
                 <meta property="og:url" content={shareUrl} /> {/* Use shareUrl instead of url */}
-            </Head>}
+            </Head>
             <section className="container details mt-5">
                 <div className="row">
                     <div className="col-lg-7 col-md-11 mx-auto">
