@@ -62,18 +62,20 @@ const AssetSetails = () => {
     const shareUrl = `https://staging-crestbase-frontend.vercel.app/assetDetails/${item?._id}`;
     const imageUrl = `${item?.views[0].url}`;
 
+    console.log(imageUrl)
+
     return (
         <>
-            <Head>
+           {item && <Head>
                 <title>{item?.name || 'Property Details'}</title>
                 <meta name="description" content={item?.description || 'Property description'} />
 
                 {/* Open Graph Meta Tags */}
                 <meta property="og:title" content={item?.name || 'Property Details'} />
                 <meta property="og:description" content={item?.description || 'Property description'} />
-                <meta property="og:image" content={item?.views[0]?.url || 'default-image-url'} />
+                <meta property="og:image" content={imageUrl || 'default-image-url'} />
                 <meta property="og:url" content={shareUrl} /> {/* Use shareUrl instead of url */}
-            </Head>
+            </Head>}
             <section className="container details mt-5">
                 <div className="row">
                     <div className="col-lg-7 col-md-11 mx-auto">
@@ -120,8 +122,8 @@ const AssetSetails = () => {
                         <div className="details-features">
                             <h6>Features</h6>
                             <div className='details-features-list'>
-                                {features?.map((item: any) => (
-                                    <p>{item.key}: <span>{item.value}</span></p>
+                                {features?.map((item: any, index:number) => (
+                                    <p key={index}>{item.key}: <span>{item.value}</span></p>
                                 ))}
                             </div>
                         </div>
@@ -137,8 +139,8 @@ const AssetSetails = () => {
                         <div className='details-inspections'>
                             <h6>Inspection Schedule</h6>
                             <div className='details-inspections-list'>
-                                {item?.inspectionSchedule.map((item) => (
-                                    <div className='d-flex align-items-center me-3'>
+                                {item?.inspectionSchedule.map((item, index:number) => (
+                                    <div className='d-flex align-items-center me-3' key={index}>
                                         <p>{item.date}: </p>
                                         <span>{item.time}</span>
                                     </div>
