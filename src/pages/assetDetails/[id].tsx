@@ -115,7 +115,7 @@ const AssetDetails = ({ data }: ApartmentResponse) => {
             <NextSeo
                 title={item.name}
                 description={item.description}
-                canonical="https://www.mycrestbase.com"
+                canonical="https://staging-crestbase-frontend.vercel.app"
                 openGraph={{
                     url: `${item.views[0].url}`,
                     title: `${item.views[0].name}`,
