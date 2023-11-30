@@ -120,6 +120,24 @@ const AssetDetails = ({ data }: ApartmentResponse) => {
                     url: `${item.views[0].url}`,
                     title: `${item.views[0].name}`,
                     description: `${item.views[0].name}`,
+                    images: [
+                        {
+                            url: `${item.views[0].url}`,
+                            width: 800,
+                            height: 600,
+                            alt: 'Og Image Alt',
+                            type: 'image/jpeg',
+                        },
+                        {
+                            url: `${item.views[0].url}`,
+                            width: 900,
+                            height: 800,
+                            alt: 'Og Image Alt Second',
+                            type: 'image/jpeg',
+                        },
+                        { url: `${item.views[0].url}` },
+                        { url: `${item.views[0].url}`, },
+                    ],
                     siteName: 'Crestbase',
                 }}
             />
@@ -242,20 +260,20 @@ export const getStaticPaths = (async () => {
         fallback: false
     };
 }) satisfies GetStaticPaths
-  
+
 export const getStaticProps = (async (context: any) => {
     try {
         const id = context.params.id;
         const res = await axios.get(`https://crestbase-be2.herokuapp.com/assets/${id}`);
         const data = res.data.data;
         return { props: { data } };
-      } catch (error) {
+    } catch (error) {
         console.error(`Error fetching data for asset with ID ${context.params.id}:`, error);
         return {
-          notFound: true,
+            notFound: true,
         };
-      }
-    
+    }
+
 }) satisfies GetStaticProps<{
     data: ApartmentResponse
 }>
