@@ -230,7 +230,6 @@ const AssetDetails = ({ data }: ApartmentResponse) => {
 
 export const getStaticPaths = (async () => {
     const res = await axios.get('https://crestbase-be2.herokuapp.com/assets/new');
-    // const data = await res.json();
     const paths = res.data?.data.map((item: any) => {
         return {
             params: {
@@ -245,11 +244,18 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths
   
 export const getStaticProps = (async (context: any) => {
-    const id = context.params.id;
-    // console.log("context", context)
-    const res = await axios.get(`https://crestbase-be2.herokuapp.com/assets/${id}`)
-    const data = res.data.data
-    return { props: { data } }
+    try {
+        const id = context.params.id;
+        const res = await axios.get(`https://crestbase-be2.herokuapp.com/assets/${id}`);
+        const data = res.data.data;
+        return { props: { data } };
+      } catch (error) {
+        console.error(`Error fetching data for asset with ID ${context.params.id}:`, error);
+        return {
+          notFound: true,
+        };
+      }
+    
 }) satisfies GetStaticProps<{
     data: ApartmentResponse
 }>
