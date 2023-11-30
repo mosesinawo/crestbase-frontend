@@ -243,7 +243,7 @@ export const getStaticPaths = (async () => {
         fallback: false
     };
 }) satisfies GetStaticPaths
-
+  
 export const getStaticProps = (async (context: any) => {
     const id = context.params.id;
     // console.log("context", context)
