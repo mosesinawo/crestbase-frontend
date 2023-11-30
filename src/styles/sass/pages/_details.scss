@@ -3,11 +3,19 @@
     &-img {
         height: 43.6rem;
         width: 100%;
+        @include respond(phone){
+            height: 30rem;
+        }
 
+      
         &-content {
             width: 100%;
             height: 43.6rem;
             border-radius: 2rem;
+            @include respond(phone){
+                height: 30rem;
+            }
+    
 
             &-tag{
                 position: absolute;
@@ -33,6 +41,22 @@
         margin-top: 3rem;
         align-items: center;
 
+        &-wrapper{
+            display: flex;
+            align-items: center;
+
+            .card-line {
+                @include respond(phone){
+                    display: none;
+                }
+            }
+
+            @include respond(phone){
+                flex-direction: column;
+                align-items: start;
+            }
+        }
+
         p {
             font-size: 1.4rem;
             line-height: 2.9rem;
@@ -56,18 +80,22 @@
 
     &-features {
         width: 100%;
-        height: 29rem;
+        height: auto;
         @include shadowBox;
 
         &-list {
             display: flex;
             gap: 1.5rem;
-            flex-direction: column;
+            flex-wrap: wrap;
             margin-top: 2rem;
         }
 
         p {
             font-size: 1.6rem;
+            background-color: #3D79EF1A;
+            width: fit-content;
+            padding: .3rem .8rem;
+            border-radius: .7rem;
         }
     }
 

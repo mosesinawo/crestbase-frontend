@@ -7,50 +7,93 @@ import { ApartmentData, ApartmentResponse, Features } from '../../../types/asset
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Head from 'next/head';
+import type { Metadata, ResolvingMetadata } from 'next'
+import TempHeader from '@/components/Header/TempHeader';
+import { NextSeo } from 'next-seo';
+import type {
+    InferGetStaticPropsType,
+    GetStaticProps,
+    GetStaticPaths,
+} from 'next'
 
-interface Feature {
-    key: string;
-    value: number;
+type Props = {
+    params: { id: string }
+    searchParams: { [key: string]: string | string[] | undefined }
+
+}
+type Asset = {
+    asset: string
+    stargazers_count: number
+}
+//   export async function generateMetadata(
+//     { params, searchParams }: Props,
+//     parent: ResolvingMetadata
+//   ): Promise<Metadata> {
+//     // read route params
+//     const id = params.id
+
+//     // fetch data
+//     const product = await fetch(`https://.../${id}`).then((res) => res.json())
+
+//     // optionally access and extend (rather than replace) parent metadata
+//     const previousImages = (await parent).openGraph?.images || []
+
+//     return {
+//       title: "test",
+//       openGraph: {
+//         images: ['/some-specific-page-image.jpg', ...previousImages],
+//       },
+//     }
+//   }
+
+//   export default function Page({ params, searchParams }: Props) {}
+
+export const metadata = {
+    title: "test crest",
+    description: 'nice house'
 }
 
-const AssetSetails = () => {
-    const [item, setItem] = useState<ApartmentData | null>(null);
+
+const AssetDetails = ({ data }: ApartmentResponse) => {
+    const item: ApartmentData = data
+    console.log("asset", item)
+    // const item:ApartmentResponse = data.data
+    // const [item, setItem] = useState<ApartmentData | null>(null);
+    // console.log(item)
 
     const router = useRouter();
     const { id } = router.query;
 
-    console.log(id)
+    // console.log(id)
 
-    const getData = async () => {
-        try {
-            const { data } = await axios.get(`https://crestbase-be2.herokuapp.com/assets/${id}`)
-            setItem(data.data)
+    // const getData = async () => {
+    //     try {
+    //         const { data } = await axios.get(`https://crestbase-be2.herokuapp.com/assets/${id}`)
+    //         setItem(data.data)
 
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    useEffect(() => {
-        if (id) {
-            getData()
-        }
-    }, [id])
-    console.log(item)
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+    // useEffect(() => {
+    //     if (id) {
+    //         getData()
+    //     }
+    // }, [id])
+    // console.log(item)
     // const featuresArray: Feature[] = Object.entries(item?.features).map(([name, count]) => ({
     //     name,
     //     count,
     // }));
     const objtoarray = (data: any) => {
         // Convert the object to a list of key-value pairs using Object.entries()
-        if (data && item?.features) {
+        if (item && item?.features) {
             const list = Object.entries(data)?.map(([key, value]) => ({ key, value }));
             return list;
 
         }
     };
-    const features = objtoarray(item?.features)
-
-    console.log(features)
+    const features = objtoarray(item.features)
 
     const sliderSettings = {
         slidesToShow: 1,
@@ -59,23 +102,30 @@ const AssetSetails = () => {
     }
 
 
-    const shareUrl = `https://staging-crestbase-frontend.vercel.app/assetDetails/${item?._id}`;
-    const imageUrl = `${item?.views[0].url}`;
+    const shareUrl = `https://staging-crestbase-frontend.vercel.app/assetDetails/${item._id}`;
+    const imageUrl = `${item.views[0].url}`;
 
-    console.log(imageUrl)
+    // console.log(imageUrl)
+    function formatNumberWithRegex(number: any) {
+        return number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 
     return (
         <>
-           <Head>
-                <title>{item?.name || 'Property Details'}</title>
-                <meta name="description" content={item?.description || 'Property description'} />
-
-                {/* Open Graph Meta Tags */}
-                <meta property="og:title" content={item?.name || 'Property Details'} />
-                <meta property="og:description" content={item?.description || 'Property description'} />
-                <meta property="og:image" content={imageUrl || 'https://res.cloudinary.com/dr0pef3mn/image/upload/v1700944172/Assets/1700944172082-IMG_7184.png.png'} />
-                <meta property="og:url" content={shareUrl} /> {/* Use shareUrl instead of url */}
-            </Head>
+            <NextSeo
+                title={item.name}
+                description={item.description}
+                canonical="https://www.mycrestbase.com"
+                openGraph={{
+                    url: `${item.views[0].url}`,
+                    title: `${item.views[0].name}`,
+                    description: `${item.views[0].name}`,
+                    siteName: 'Crestbase',
+                }}
+            />
+            <TempHeader
+                color=''
+            />
             <section className="container details mt-5">
                 <div className="row">
                     <div className="col-lg-7 col-md-11 mx-auto">
@@ -98,15 +148,15 @@ const AssetSetails = () => {
                         </div>
 
                         <div className='d-flex flex-column details-info align-items-start'>
-                            <div className='d-flex '>
+                            <div className=' details-info-wrapper'>
                                 <p className='details-type'>{item?.apartmentType?.name}</p>
                                 <div className='card-line ' />
                                 <p className='details-area'>{item?.location}</p>
                             </div>
                             <div className='d-flex align-items-center mt-3'>
-                                <p className='details-price'>{item?.annualPayment}</p>
+                                <p className='details-price'>₦{formatNumberWithRegex(`${item?.annualPayment}`)}</p>
                                 <div className='card-line ' />
-                                <p className='details-price'>{item?.totalPrice}</p>
+                                <p className='details-price'>₦{formatNumberWithRegex(item?.totalPrice)}</p>
                             </div>
 
                         </div>
@@ -122,7 +172,7 @@ const AssetSetails = () => {
                         <div className="details-features">
                             <h6>Features</h6>
                             <div className='details-features-list'>
-                                {features?.map((item: any, index:number) => (
+                                {features?.map((item: any, index: number) => (
                                     <p key={index}>{item.key}: <span>{item.value}</span></p>
                                 ))}
                             </div>
@@ -139,10 +189,10 @@ const AssetSetails = () => {
                         <div className='details-inspections'>
                             <h6>Inspection Schedule</h6>
                             <div className='details-inspections-list'>
-                                {item?.inspectionSchedule.map((item, index:number) => (
+                                {item?.inspectionSchedule.map((item, index: number) => (
                                     <div className='d-flex align-items-center me-3' key={index}>
-                                        <p>{item.date}: </p>
-                                        <span>{item.time}</span>
+                                        <p>{item.date}: </p>&nbsp;
+                                        <span style={{ color: "#3D79EF", fontSize: 17, fontWeight: 600 }}>{item.time}</span>
                                     </div>
 
                                 ))}
@@ -154,7 +204,7 @@ const AssetSetails = () => {
 
                         <div className="details-profile">
                             <div className='d-flex align-items-start gap-3'>
-                                <img src="/images/avatar.svg" alt="" />
+                                <img src={item?.agent.user.profilePicture} alt="" style={{ width: 50, height: 50, borderRadius: "50%" }} />
                                 <div className='d-flex flex-column gap-1'>
                                     <div className='d-flex align-items-center gap-3'>
                                         <p className='details-profile-name'>{item?.agent.user.firstName} {item?.agent.user.lastName}</p>
@@ -177,4 +227,31 @@ const AssetSetails = () => {
     )
 }
 
-export default AssetSetails
+
+export const getStaticPaths = (async () => {
+    const res = await axios.get('https://crestbase-be2.herokuapp.com/assets/new');
+    // const data = await res.json();
+    const paths = res.data?.data.map((item: any) => {
+        return {
+            params: {
+                id: item.id.toString()
+            }
+        };
+    });
+    return {
+        paths,
+        fallback: false
+    };
+}) satisfies GetStaticPaths
+
+export const getStaticProps = (async (context: any) => {
+    const id = context.params.id;
+    // console.log("context", context)
+    const res = await axios.get(`https://crestbase-be2.herokuapp.com/assets/${id}`)
+    const data = res.data.data
+    return { props: { data } }
+}) satisfies GetStaticProps<{
+    data: ApartmentResponse
+}>
+
+export default AssetDetails

@@ -16,7 +16,8 @@ import { useRouter } from "next/router";
 interface SidebarProps {
   isSidebarOpen: boolean;
   setSidebarOpen: (isOpen: boolean) => void;
-  faqsRef: React.RefObject<HTMLDivElement>;
+  // faqsRef?: React.RefObject<HTMLDivElement> | any;
+  faqsRef?: React.RefObject<HTMLDivElement> | any;
 }
 
 const SidebarNav: FC<SidebarProps> = ({
@@ -51,9 +52,9 @@ const SidebarNav: FC<SidebarProps> = ({
         </MobileHeaderMenuIcon>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarLinks onClick={() => handleScrollToSection(faqsRef)}>
+        {/* <SidebarLinks onClick={() => handleScrollToSection(faqsRef)}>
           Contact Us
-        </SidebarLinks>
+        </SidebarLinks> */}
         <SidebarDownloadLink>
           <AppDownloadLink
             onClick={handleDownloadLinkClick}

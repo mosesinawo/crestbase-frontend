@@ -82,6 +82,7 @@ const SidebarMenu = styled.div`
 
   &.open {
     left: 0;
+    z-index: 20;
   }
 
   @media ${device.laptop} {
