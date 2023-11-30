@@ -204,10 +204,10 @@ const AssetDetails = ({ data }: ApartmentResponse) => {
 
                         <div className="details-profile">
                             <div className='d-flex align-items-start gap-3'>
-                                <img src={item?.agent.user.profilePicture} alt="" style={{ width: 50, height: 50, borderRadius: "50%" }} />
+                                <img src={item?.agent?.user?.profilePicture} alt="" style={{ width: 50, height: 50, borderRadius: "50%" }} />
                                 <div className='d-flex flex-column gap-1'>
                                     <div className='d-flex align-items-center gap-3'>
-                                        <p className='details-profile-name'>{item?.agent.user.firstName} {item?.agent.user.lastName}</p>
+                                        <p className='details-profile-name'>{item?.agent?.user?.firstName} {item?.agent?.user?.lastName}</p>
                                         <span className='details-profile-tag'><img src="/icons/verified.svg" alt="" /> Verified</span>
                                     </div>
                                     <p className='details-profile-type'>Agent</p>
@@ -229,7 +229,7 @@ const AssetDetails = ({ data }: ApartmentResponse) => {
 
 
 export const getStaticPaths = (async () => {
-    const res = await axios.get('https://crestbase-be2.herokuapp.com/assets/new?limit=10');
+    const res = await axios.get('https://crestbase-be2.herokuapp.com/assets/new');
     const paths = res.data?.data.map((item: any) => {
         return {
             params: {
