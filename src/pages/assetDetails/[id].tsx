@@ -229,7 +229,7 @@ const AssetDetails = ({ data }: ApartmentResponse) => {
 
 
 export const getStaticPaths = (async () => {
-    const res = await axios.get('https://crestbase-be2.herokuapp.com/assets/new');
+    const res = await axios.get('https://crestbase-be2.herokuapp.com/assets/new?limit=10');
     const paths = res.data?.data.map((item: any) => {
         return {
             params: {
